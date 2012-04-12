@@ -40,6 +40,10 @@ To re-generate the apache confs after modifying/adding vhosts:
 
     megalodon update_vhosts
 
+To add an SSL version (with self-signed cert) of a virtual host, add the following line to a host's json file.
+
+    "SSL": true
+
 Then restart apache as above.
 
 ## Other notes

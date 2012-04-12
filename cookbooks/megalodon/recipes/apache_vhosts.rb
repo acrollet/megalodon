@@ -35,6 +35,15 @@ vhosts.each do |vhost_name|
     server_name vhost['servername']
     template "vhost.conf.erb"
   end
+  if vhost.include? 'SSL'
+    if vhost['SSL']  == true
+      megalodon_app "#{vhost['id']}_ssl" do
+        docroot vhost['docroot']
+        server_name vhost['servername']
+        template "vhost_ssl.conf.erb"
+      end
+    end
+  end
 end
 
 template "#{node[:megalodon][:brew_prefix]}/etc/megalodon/apache_confs/php5.conf" do

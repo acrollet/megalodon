@@ -1,0 +1,33 @@
+<VirtualHost *:443>
+  ServerName "<%= @params[:server_name] %>"
+  DocumentRoot "<%= @params[:docroot] %>"
+  RewriteEngine On
+
+  # SSL Configuration
+  SSLEngine on
+  SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP
+  SSLOptions +FakeBasicAuth +ExportCertData +StdEnvVars +StrictRequire
+
+  # Self Signed certificates
+  SSLCertificateFile /etc/apache2/ssl/server.crt
+  SSLCertificateKeyFile /etc/apache2/ssl/host.key
+
+  <Directory "<%= @params[:docroot] %>">
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/css
+  </Directory>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+</VirtualHost>
+
