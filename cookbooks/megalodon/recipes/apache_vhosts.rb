@@ -33,12 +33,14 @@ vhosts.each do |vhost_name|
   megalodon_app vhost['id'] do
     docroot vhost['docroot']
     server_name vhost['servername']
+    server_aliases vhost['server_aliases']
     template "vhost.conf.erb"
   end
   if vhost.include? 'SSL' and vhost['SSL']  == true
     megalodon_app "#{vhost['id']}_ssl" do
       docroot vhost['docroot']
       server_name vhost['servername']
+      server_aliases vhost['server_aliases']
       template "vhost_ssl.conf.erb"
     end
   else

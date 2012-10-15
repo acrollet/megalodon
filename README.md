@@ -44,6 +44,10 @@ To add an SSL version (with self-signed cert) of a virtual host, add the followi
 
     "SSL": true
 
+To add server aliases to a virtual host, add the following line to a host's json file.
+
+    "server_aliases": [ "alias1.example.com", "alias2.example.com"],
+
 Then restart apache as above.
 
 ## Other notes

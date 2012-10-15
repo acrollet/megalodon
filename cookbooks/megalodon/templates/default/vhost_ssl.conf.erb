@@ -1,5 +1,10 @@
 <VirtualHost *:443>
   ServerName "<%= @params[:server_name] %>"
+  <% if @params[:server_aliases] %>
+    <% @params[:server_aliases].each do |a| %>
+  ServerAlias "<%= a %>"
+    <% end %>
+  <% end %>
   DocumentRoot "<%= @params[:docroot] %>"
   RewriteEngine On
 
